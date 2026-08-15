@@ -435,7 +435,7 @@ class MainWindow(QWidget):
         sidebar = QFrame(); sidebar.setObjectName("sidebar"); sidebar.setFixedWidth(195)
         sl = QVBoxLayout(sidebar); sl.setContentsMargins(10,16,10,16); sl.setSpacing(4)
 
-        brand = QLabel("🎨 ArtTools"); brand.setObjectName("brand")
+        brand = QLabel("ArtTools"); brand.setObjectName("brand")
         sl.addWidget(brand); sl.addSpacing(11)
 
         pages = [("💬","Code AI"),("▶","Run / Test"),("🔍","Error Check"),
