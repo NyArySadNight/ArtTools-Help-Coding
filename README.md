@@ -1,6 +1,8 @@
 The ArtTools (Vers For Vietnamese)
 Prerequisites & Dependencies
+
 ArtToolsv2 Fix GPU And ArtTools Has GPU Load But Is Broke
+
 ChatEveryWare has fixed is not active 
 
 To ensure stable execution and full functionality of ArtTools, the following Python packages must be installed: 
