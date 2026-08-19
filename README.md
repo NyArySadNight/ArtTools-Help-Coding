@@ -1,74 +1,75 @@
-# ArtTools — Vers For Vietnamese
+# ArtTools
 
-Trợ lý lập trình desktop (PyQt6): hỏi-đáp AI để sinh code, chạy/test code
-ngay trong app, rà lỗi bằng AI, chatbot, và theo dõi tài nguyên hệ thống —
-tất cả trong một sidebar duy nhất.
+A desktop coding assistant (PyQt6): ask an AI to generate code, run/test it
+right inside the app, review it for bugs with AI, chat freely, and monitor
+system resources — all from one sidebar.
 
-Repo có **2 bản**:
+The repo ships **2 versions**:
 
-| File | Trạng thái | Khác biệt |
+| File | Status | Difference |
 |---|---|---|
-| `ArtToolsv2.py` | ✅ Khuyến nghị dùng bản này | Trang Manager chỉ theo dõi CPU & RAM — ổn định |
-| `ArtTools.py` | ⚠️ Bản có theo dõi GPU nhưng đang lỗi | Thêm theo dõi GPU rời (qua `nvidia-smi`) và GPU tích hợp (qua sysfs Linux), nhưng phần đọc tải GPU chưa hoạt động đúng |
+| `ArtToolsv2.py` | ✅ Recommended | Manager page only tracks CPU & RAM — stable |
+| `ArtTools.py` | ⚠️ Has GPU tracking, but broken | Adds discrete GPU monitoring (via `nvidia-smi`) and integrated GPU monitoring (via Linux sysfs), but GPU load reading doesn't work correctly yet |
 
-Nếu không cần theo dõi GPU, luôn chạy `ArtToolsv2.py`.
+If you don't need GPU monitoring, always run `ArtToolsv2.py`.
 
-## Tính năng
+## Features
 
-| Trang | Mô tả |
+| Page | Description |
 |---|---|
-| 💬 Code AI | Sinh code theo yêu cầu, chọn ngôn ngữ (Python / C++ / Lua / Luau) và model (Free / Claude / DeepSeek / ChatGPT) |
-| ▶ Run / Test | Chạy trực tiếp code vừa sinh — hỗ trợ Python (interpreter hệ thống), C++ (biên dịch bằng `g++`), Lua/Luau (`lua` hoặc `luau`); có ô nhập stdin khi chương trình đang chạy |
-| 🔍 Error Check | Đưa code cho AI review: lỗi cú pháp, logic, edge case, hiệu năng — trả lời tiếng Việt kèm code sửa |
-| 🗨 Chat Bot | Chat tự do với AI ngay trong app |
-| 📊 Manager | Theo dõi CPU, RAM (và GPU ở bản `ArtTools.py`), pin, danh sách tiến trình |
-| ❄ Effect | Hiệu ứng nền: Tuyết rơi / Mưa / Lá rơi |
-| 🔑 Settings | Nhập API key, chọn model AI mặc định, xem thông tin cấu hình |
+| 💬 Code AI | Generates code on request; choose language (Python / C++ / Lua / Luau) and model (Free / Claude / DeepSeek / ChatGPT) |
+| ▶ Run / Test | Runs the generated code directly — supports Python (system interpreter), C++ (compiled with `g++`), Lua/Luau (`lua` or `luau`); has a stdin box for interactive programs |
+| 🔍 Error Check | Sends code to the AI for review: syntax errors, logic bugs, edge cases, performance — returns fixes with corrected code |
+| 🗨 Chat Bot | Free-form chat with the AI right inside the app |
+| 📊 Manager | Tracks CPU, RAM (and GPU in `ArtTools.py`), battery, and running processes |
+| ❄ Effect | Background effects: Snow / Rain / Falling Leaves |
+| 🔑 Settings | Enter API keys, choose the default AI model, view config info |
 
-## Yêu cầu
+## Requirements
 
 - Python 3.9+
-- Thư viện Python:
+- Python dependencies:
 
 ```bash
 pip install PyQt6 requests psutil gputil
 ```
 
-- Để dùng tính năng **Run / Test**:
-  - C++ cần có `g++` trong PATH.
-  - Lua/Luau cần có `lua` hoặc `luau` trong PATH.
-  - Python dùng thẳng interpreter hệ thống, không cần cài thêm.
-- Để theo dõi GPU rời NVIDIA (chỉ bản `ArtTools.py`): cần `nvidia-smi` có sẵn
-  trong PATH (đi kèm driver NVIDIA).
+- For the **Run / Test** feature:
+  - C++ needs `g++` available on your PATH.
+  - Lua/Luau needs `lua` or `luau` on your PATH.
+  - Python uses the system interpreter directly — nothing extra to install.
+- For discrete NVIDIA GPU monitoring (`ArtTools.py` only): needs `nvidia-smi`
+  available on your PATH (comes with the NVIDIA driver).
 
-## Chạy chương trình
+## Running
 
 ```bash
 python ArtToolsv2.py
 ```
 
-## Model AI
+## AI Models
 
-- **Free**: dùng API miễn phí công khai, không cần key — chất lượng có thể
-  thay đổi tùy nhà cung cấp.
-- **Claude / DeepSeek / ChatGPT**: cần nhập API key riêng của bạn ở trang
-  Settings.
+- **Free**: uses a public free API, no key required — quality may vary
+  depending on the provider.
+- **Claude / DeepSeek / ChatGPT**: requires your own API key, entered on the
+  Settings page.
 
-## Cấu hình
+## Configuration
 
-Lưu tại:
+Stored at:
 
 - Windows: `%APPDATA%\ArtTools\config.json`
 - Linux/macOS: `~/.config/ArtTools/config.json`
 
-⚠️ File này chứa API key nếu bạn đã nhập — **không commit/chia sẻ file
-config.json** này lên đâu công khai.
+⚠️ This file contains your API key if you've entered one — **do not
+commit/share this config.json file** anywhere public.
 
-## Lưu ý
+## Notes
 
-- README bản gốc của repo có ghi nhầm lệnh chạy là `ArtTools.py` cho cả 2
-  bản — README này đã sửa đúng: chạy `ArtToolsv2.py` (bản ổn định) hoặc
-  `ArtTools.py` (bản có GPU nhưng còn lỗi tải GPU), tùy nhu cầu.
-- Tính năng "Free" (không cần API key) gọi một API bên thứ ba công khai
-  (`chateverywhere.app`) — có thể ngừng hoạt động bất cứ lúc nào ngoài tầm
-  kiểm soát của repo này; nếu gặp lỗi, chuyển sang model có API key riêng.
+- The original README mistakenly listed `ArtTools.py` as the run command for
+  both versions — this README fixes that: run `ArtToolsv2.py` (stable) or
+  `ArtTools.py` (has GPU tracking, but it's currently broken), depending on
+  your needs.
+- The "Free" model (no API key needed) calls a third-party public API
+  (`chateverywhere.app`) — it may stop working at any time, outside this
+  repo's control; switch to a model with your own API key if it fails.
